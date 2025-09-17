@@ -1,0 +1,19 @@
+pragma solidity ^0.8.20;
+
+contract DAOForge {
+    struct Proposal {
+        string description;
+        uint256 votes;
+    }
+
+    Proposal[] public proposals;
+
+    function createProposal(string calldata desc) external {
+        proposals.push(Proposal(desc, 0));
+    }
+
+    function vote(uint256 proposalId) external {
+        require(proposalId < proposals.length, "Invalid proposal");
+        proposals[proposalId].votes += 1;
+    }
+}
